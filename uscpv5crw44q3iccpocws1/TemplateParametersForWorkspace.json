@@ -6,10 +6,10 @@
 			"value": "uscpv5crw44q3iccpocws1"
 		},
 		"uscpv5crw44q3iccpocws1-WorkspaceDefaultSqlServer_connectionString": {
-			"value": ""
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:uscpv5crw44q3iccpocws1.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
 		"TripFaresSynapseAnalyticsLinkedService_connectionString": {
-			"value": ""
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().SynapseWorkspaceName};Initial Catalog=@{linkedService().SQLDedicatedPoolName};User ID=@{linkedService().SQLLoginUsername}"
 		},
 		"uscpv5crw44q3iccpocws1-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://uscpv5crw44q3iccpoc.dfs.core.windows.net/"
