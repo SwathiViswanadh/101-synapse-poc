@@ -287,7 +287,7 @@
 			},
 			"SQLDedicatedPoolName": {
 				"type": "string",
-				"defaultValue": "uscpv5crw44q3iccpocws1p1 "
+				"defaultValue": " uscpv5crw44q3iccpocws1p1"
 			},
 			"SQLLoginUsername": {
 				"type": "string",
