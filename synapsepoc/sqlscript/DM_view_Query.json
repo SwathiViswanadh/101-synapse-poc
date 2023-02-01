@@ -1,0 +1,17 @@
+{
+	"name": "DM_view_Query",
+	"properties": {
+		"content": {
+			"query": "SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <> session_id();",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "pocf2ly6yljx75mypocws1p1",
+				"poolName": "pocf2ly6yljx75mypocws1p1"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
