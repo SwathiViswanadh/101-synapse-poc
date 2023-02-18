@@ -34,6 +34,78 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('workspaceName'), '/SynapsePOC')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools?api-version=2019-06-01-preview')",
+								"type": "Expression"
+							},
+							"connectVia": {
+								"referenceName": "AutoResolveIntegrationRuntime",
+								"type": "IntegrationRuntimeReference"
+							},
+							"method": "GET",
+							"headers": {},
+							"authentication": {
+								"resource": "https://management.azure.com/",
+								"credential": {
+									"referenceName": "userassignedmanagedidentity",
+									"type": "CredentialReference"
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"ResourceGroup": {
+						"type": "string",
+						"defaultValue": "rg_POC"
+					},
+					"SQLPoolName": {
+						"type": "string",
+						"defaultValue": "pocf2ly6yljx75mypocws1p1"
+					},
+					"SubscriptionID": {
+						"type": "string",
+						"defaultValue": "353c281f-ad57-43e1-8c7d-53f387cbec07"
+					},
+					"PauseorResume": {
+						"type": "string",
+						"defaultValue": "Pause"
+					},
+					"WorkspaceName": {
+						"type": "string",
+						"defaultValue": "pocf2ly6yljx75mypocws1"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/credentials/userassignedmanagedidentity')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/TripFaresDataPipeline')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -974,6 +1046,38 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/userassignedmanagedidentity')]",
+			"type": "Microsoft.Synapse/workspaces/credentials",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "ManagedIdentity",
+				"typeProperties": {
+					"resourceId": "/subscriptions/353c281f-ad57-43e1-8c7d-53f387cbec07/resourcegroups/rg_POC/providers/Microsoft.ManagedIdentity/userAssignedIdentities/POCmanagedidentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DM_view_Query')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <> session_id();",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "pocf2ly6yljx75mypocws1p1",
+						"poolName": "pocf2ly6yljx75mypocws1p1"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/ws1sparkpool1')]",
 			"type": "Microsoft.Synapse/workspaces/bigDataPools",
 			"apiVersion": "2019-06-01-preview",
@@ -1027,26 +1131,6 @@
 			"type": "Microsoft.Synapse/workspaces/managedVirtualNetworks",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/DM_view_Query')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "SELECT * FROM sys.dm_pdw_exec_sessions where status <> 'Closed' and session_id <> session_id();",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "pocf2ly6yljx75mypocws1p1",
-						"poolName": "pocf2ly6yljx75mypocws1p1"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
 			"dependsOn": []
 		}
 	]
