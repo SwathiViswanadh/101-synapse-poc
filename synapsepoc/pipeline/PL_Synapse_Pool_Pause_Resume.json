@@ -148,7 +148,12 @@
 														"type": "IntegrationRuntimeReference"
 													},
 													"method": "POST",
-													"body": "",
+													"body": {
+														"SubscriptionID": "@{pipeline().parameters.SubscriptionID}",
+														"ResourceGroup": "@{pipeline().parameters.ResourceGroup}",
+														"WorkspaceName": "@{pipeline().parameters.WorkspaceName}",
+														"SQLPoolName": "@{pipeline().parameters.SQLPoolName}"
+													},
 													"authentication": {
 														"resource": "https://management.azure.com",
 														"credential": {
@@ -185,6 +190,12 @@
 														"type": "IntegrationRuntimeReference"
 													},
 													"method": "POST",
+													"body": {
+														"SubscriptionID": "@{pipeline().parameters.SubscriptionID}",
+														"ResourceGroup": "@{pipeline().parameters.ResourceGroup}",
+														"WorkspaceName": "@{pipeline().parameters.WorkspaceName}",
+														"SQLPoolName": "@{pipeline().parameters.SQLPoolName}"
+													},
 													"authentication": {
 														"resource": "https://management.azure.com/",
 														"credential": {
