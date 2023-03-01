@@ -140,7 +140,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"url": {
-														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',pipeline().parameters.SQLPoolName,'/resume?api-version=2019-06-01-preview HTTP/1.1')",
+														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',activity('List of SQL Pools').output.name,'/resume?api-version=2019-06-01-preview HTTP/1.1')",
 														"type": "Expression"
 													},
 													"connectVia": {
