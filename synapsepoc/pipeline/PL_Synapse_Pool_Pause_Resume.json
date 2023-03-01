@@ -124,7 +124,7 @@
 								},
 								"cases": [
 									{
-										"value": "PauseThenResume",
+										"value": "Paused-Resume",
 										"activities": [
 											{
 												"name": "Resuming the Pool",
@@ -140,7 +140,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"url": {
-														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',activity('List of SQL Pools').output.name,'/resume?api-version=2019-06-01-preview HTTP/1.1')",
+														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',pipeline().parameters.SQLPoolName,'/resume?api-version=2019-06-01-preview')",
 														"type": "Expression"
 													},
 													"connectVia": {
@@ -166,7 +166,7 @@
 										]
 									},
 									{
-										"value": "ResumeThenPause",
+										"value": "Online-Pause",
 										"activities": [
 											{
 												"name": "Pausing the Pool",
@@ -182,7 +182,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"url": {
-														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',activity('Get SQL Pool state').output.name,'/pause?api-version=2019-06-01-preview')",
+														"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SubscriptionID,'/resourceGroups/',pipeline().parameters.ResourceGroup,'/providers/Microsoft.Synapse/workspaces/',pipeline().parameters.WorkspaceName,'/sqlPools/',pipeline().parameters.SQLPoolName,'/pause?api-version=2019-06-01-preview')",
 														"type": "Expression"
 													},
 													"connectVia": {
