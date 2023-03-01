@@ -51,7 +51,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@not(endswith(item().name,'prod'))",
+						"value": "@not(endswith(item().name,'pool'))",
 						"type": "Expression"
 					}
 				}
@@ -73,6 +73,7 @@
 						"value": "@activity('Filter1').output.value",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Get SQL Pool state",
